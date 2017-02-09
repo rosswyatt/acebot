@@ -94,7 +94,7 @@ def ace_song():
     time.sleep(1)
     slack_client.api_call("chat.postMessage", channel=channel, text="Give me an E", as_user=True)
     time.sleep(1)
-    return "I regret everything"
+    return "GO TEAM ACE!"
 
 
 # Load the bot to slack and print a message if successful or not.  Also run a loop that will run the two main functions (checking if a message is directed at AceBot and responding to any messages).
