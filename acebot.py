@@ -10,6 +10,7 @@
 
 import os
 import time
+import secrets
 from slackclient import SlackClient
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -76,6 +77,9 @@ def handle_command(command, channel, ts):
     elif 'weather' in command:
         response = "It is always sunny in the land of ACE."
 
+    elif command.startswith('magic8'):
+    	response = magic_8()
+
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
@@ -96,6 +100,13 @@ def ace_song():
     time.sleep(1)
     return "GO TEAM ACE!"
 
+def magic_8():
+	magic = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", 
+	"As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", 
+	"Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it",
+	"My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
+
+	return secrets.choice(magic)
 
 # Load the bot to slack and print a message if successful or not.  Also run a loop that will run the two main functions (checking if a message is directed at AceBot and responding to any messages).
 
