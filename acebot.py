@@ -10,7 +10,7 @@
 
 import os
 import time
-import secrets
+import random
 from slackclient import SlackClient
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -108,7 +108,7 @@ def magic_8():
 	"Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it",
 	"My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
-	return secrets.choice(magic)
+	return random.choice(magic)
 
 def help():
 	slack_client.api_call("chat.postMessage", channel=channel, text="Documents - doc library, coding doc, folder doc, learn python, learn R, data security, software doc", as_user=True)
