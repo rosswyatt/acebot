@@ -83,6 +83,9 @@ def handle_command(command, channel, ts):
     elif command == "help":
     	response = help()
 
+    elif command =="github":
+        response = "https://github.com/rosswyatt/acebot"
+
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 
