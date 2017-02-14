@@ -89,7 +89,8 @@ def handle_command(command, channel, ts):
         
     elif command =="benugo menu":
         response = menu()
-    elif command =="halloumi"
+
+    elif command =="halloumi":
         answer = menu_search("halloumi")
         if answer[0]:
             response = ("%s available on %s" % answer[1],answer[0])
