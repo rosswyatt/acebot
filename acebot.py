@@ -12,6 +12,7 @@ import os
 import time
 import random
 from slackclient import SlackClient
+from benugoMenu import menu
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -85,6 +86,9 @@ def handle_command(command, channel, ts):
 
     elif command =="github":
         response = "https://github.com/rosswyatt/acebot"
+        
+    elif command =="benugo menu":
+        response = menu()
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
@@ -105,6 +109,10 @@ def ace_song():
     time.sleep(1)
     return "GO TEAM ACE!"
 
+#  This function will return a random response from the magic 8 ball responses
+
+# In[ ]:
+
 def magic_8():
 	magic = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", 
 	"As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", 
@@ -113,9 +121,13 @@ def magic_8():
 
 	return random.choice(magic)
 
+#  This function will return a all the functions available to slack bot
+
+# In[ ]:
+
 def help():
 	slack_client.api_call("chat.postMessage", channel=channel, text="Documents - doc library, coding doc, folder doc, learn python, learn R, data security, software doc", as_user=True)
-	slack_client.api_call("chat.postMessage", channel=channel, text="Links - web, file link", as_user=True)
+	slack_client.api_call("chat.postMessage", channel=channel, text="Links - web, file link, github", as_user=True)
 	return "Other - ace song, weather, magic8, show karik, pie chart, tumbleweed, dsh, dash"
 
 

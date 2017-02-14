@@ -16,6 +16,5 @@ def menu(day = None):
 					par.append(run.text.lower())
 				text_runs.append(par)
 	return text_runs;
-# print(text_runs)
 
 
