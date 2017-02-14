@@ -29,12 +29,14 @@ def halloumi(eats = 'halloumi'):
 			MenU = menU[i::-1]
 			break
 	if len(MenU)>0:
+		#print(MenU)
+		dayIndex = []
 		for day in days:
 			if day in MenU:
-				message = "Praise be! We havin' " + eats + ' ' + day + '.'
-				break
-
-
+				dayIndex.append(MenU.index(day))
+				#print(dayIndex)
+		day = MenU[min(dayIndex)]
+		message = "Praise be! We havin' " + eats + ' ' + day + '.'
 	return message;
 
 def menu_search(t):
