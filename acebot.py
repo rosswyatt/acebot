@@ -12,7 +12,7 @@ import os
 import time
 import random
 from slackclient import SlackClient
-from benugoMenu import menu, menu_search
+from benugoMenu import menu, menu_search, halloumi
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -96,6 +96,9 @@ def handle_command(command, channel, ts):
         else:
             response = ("Sadness, no halloumi this week.")
         answer = None
+    elif command.startswith('I want'):
+        eats = command[7:]
+        response = halloumi(eats)
 
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
