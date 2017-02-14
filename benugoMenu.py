@@ -16,7 +16,6 @@ def menu(day = None):
 					par.append(run.text.lower())
 				text_runs.append(par)
 	return text_runs;
-# print(text_runs)
 
 def halloumi(eats = 'halloumi'):
 	MenU = []
@@ -35,4 +34,20 @@ def halloumi(eats = 'halloumi'):
 				message = "Praise be! We havin' " + eats + ' ' + day + '.'
 				break
 
+
 	return message;
+
+def menu_search(t):
+    '''Search the menu for t, return the days t is in the menu and the menu item'''
+    menu_items = []
+    day = []
+    for i, x in enumerate(benugoMenu.menu()):
+        if t in ' '.join(x):
+            #start at i, search backwards until we find day
+            menu_items.append(' '.join(x))
+            j = i
+            while 'day' not in ' '.join(a[j]):
+                j = j-1
+            day.append(' '.join(a[j]))
+            
+    return (day, menu_items)
