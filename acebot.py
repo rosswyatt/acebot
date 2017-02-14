@@ -4,7 +4,7 @@
 # # AceBot
 # ### This program is for a slack bot called AceBot
 
-# The first part of this program will import the needed librarys and set the required IDs.  The BOT_ID and the SLACK_BOT_TOKEN have already been put into my virtualenv. 
+# The first part of this program will import the needed libraries and set the required IDs.  The BOT_ID and the SLACK_BOT_TOKEN have already been put into my virtualenv. 
 
 # In[ ]:
 
