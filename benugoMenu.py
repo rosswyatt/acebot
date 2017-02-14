@@ -18,4 +18,21 @@ def menu(day = None):
 	return text_runs;
 # print(text_runs)
 
+def halloumi(eats = 'halloumi'):
+	MenU = []
+	menU = sum(menu(),[])
+	days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+	message = 'Sorry Karik, no ' + eats + ' this week.'
+	for st in menU:
+		c = st.find(eats)
+		if c > -1:
+			i = menU.index(st)
+			MenU = menU[i::-1]
+			break
+	if len(MenU)>0:
+		for day in days:
+			if day in MenU:
+				message = "Praise be! We havin' " + eats + ' ' + day + '.'
+				break
 
+	return message;
