@@ -18,3 +18,17 @@ def menu(day = None):
 	return text_runs;
 
 
+def menu_search(t):
+    '''Search the menu for t, return the days t is in the menu and the menu item'''
+    menu_items = []
+    day = []
+    for i, x in enumerate(benugoMenu.menu()):
+        if t in ' '.join(x):
+            #start at i, search backwards until we find day
+            menu_items.append(' '.join(x))
+            j = i
+            while 'day' not in ' '.join(a[j]):
+                j = j-1
+            day.append(' '.join(a[j]))
+            
+    return (day, menu_items)
