@@ -3,7 +3,8 @@ import time, pptx, urllib.request
 def menu(day = None):
 	if day == None:
 		day = time.strftime('%A')
-	urllib.request.urlretrieve("https://intranet.justice.gov.uk/documents/2016/02/benugo-weekly-menu.pptx", "bwm1.pptx")
+	if day == 'Monday':
+		urllib.request.urlretrieve("https://intranet.justice.gov.uk/documents/2016/02/benugo-weekly-menu.pptx", "bwm1.pptx")
 	prs = pptx.Presentation('bwm1.pptx')
 	text_runs = []
 	for slide in prs.slides:
