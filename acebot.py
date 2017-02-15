@@ -97,7 +97,7 @@ def handle_command(command, channel, ts):
         else:
             response = ("Sadness, no halloumi this week.")
         answer = None
-    elif command.startswith('I want'):
+    elif command.startswith('i want'):
         eats = command[7:]
         response = halloumi(eats)
 
