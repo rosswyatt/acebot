@@ -3,10 +3,10 @@ import datetime
 from bs4 import BeautifulSoup
 import urllib
 import sys
-from slackclient import SlackClient
 
 
-def TrainTimes(origin,destination,time_input="09:00",day="today"):
+
+def TrainTimes(origin,destination,time_input="now",day="today"):
 	# if time is set to now, make time equal to nearest 15 min
 	if time_input == "now":
 		tm = datetime.datetime.now()
@@ -14,7 +14,9 @@ def TrainTimes(origin,destination,time_input="09:00",day="today"):
 	                             seconds=tm.second,
 	                             microseconds=tm.microsecond)
 		tm = str(tm)
+		tm = tm[11:16]
 		time_input = tm
+		
 	# otherwise, take input and set it to the nearest 15 min
 	else:
 		tm = datetime.datetime.strptime(time_input,"%H:%M")
@@ -61,4 +63,5 @@ def CallTrainTimes(command):
 	elif len(command_list) == 2:
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
+
 
