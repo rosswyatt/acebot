@@ -70,6 +70,15 @@ def roomcleaning(command):
 		command_list.remove("a")
 		command_list.remove("room")
 
-		results = roombooking(command_list[0],command_list[1],command_list[2])
+		if len(command_list) = 3:
+			results = roombooking(command_list[0],command_list[1],command_list[2])
+		elif len(command_list) = 2:
+			results = roombooking(command_list[0],command_list[1],0)
+		elif len(command_list) = 1:
+			results = roombooking(command_list[0],0,0)
+		elif len(command_list) = 0:
+			results = roombooking(0,0,0)
+
 		return results
 
+results=roomcleaning(command)
