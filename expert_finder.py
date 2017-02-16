@@ -6,7 +6,7 @@ def return_expert (command):
 
     skill = str.lower(command).split(' ')[2]
     
-    skills_df = pd.read_csv('/Users/admin/Documents/Away_Days/acebot/skills_matrix.csv')
+    skills_df = pd.read_csv('./csv_inputs/skills_matrix.csv')
 
     for column in skills_df.columns.tolist():
         if str.lower(column) == skill:
