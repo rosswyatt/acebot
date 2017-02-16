@@ -126,7 +126,11 @@ def handle_command(command, channel, ts):
     elif command.startswith('random song'):
         response = song_url()
     elif command.startswith("traintimes"):
-        CallTrainTimes(command)
+        try:
+            CallTrainTimes(command)
+        except(UnboundLocalError, ValueError):
+            response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
+            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 
