@@ -134,7 +134,7 @@ def handle_command(command, channel, ts, user):
             response = "Have a lovely journey"
         except(UnboundLocalError, ValueError, urllib.error.HTTPError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+            time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
     elif command == "help me book a room":
         response = roombooking
