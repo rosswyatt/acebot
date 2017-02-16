@@ -20,11 +20,13 @@ from python_help import pyHelp
 from Whos_on_what import whos_on_what
 from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
+from weather import weather_emoji
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
 from roombookingquery import roombooking, roomcleaning
-
 from stats import linker 
+from stats2 import linker
+from calculator import InputsCalc
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -87,8 +89,8 @@ def handle_command(command, channel, ts, user):
     elif 'pie chart' in command:
         response = "AceBot is disgusted by pie charts.  They are held in the same regard as the name DaSH."
 
-    elif 'weather' in command:
-        response = "It is always sunny in the land of ACE."
+    elif command.startswith('weather'):
+        response = weather_emoji(command)
 
     elif command.startswith('magic8'):
     	response = magic_8()
@@ -143,7 +145,7 @@ def handle_command(command, channel, ts, user):
             response = "Have a lovely journey"
         except(UnboundLocalError, ValueError, urllib.error.HTTPError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+            time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
     elif command.startswith('book a room'):
         try:
@@ -156,7 +158,11 @@ def handle_command(command, channel, ts, user):
         cdummy = command.replace("stats","")
         response = linker(cdummy)
 
+    elif command.startswith("calculate"):
+        response = InputsCalc(command)
+
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+
 
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
