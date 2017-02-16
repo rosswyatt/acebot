@@ -186,7 +186,7 @@ if __name__ == "__main__":
     if slack_client.rtm_connect():
         print("AceBot connected and running!")
         while True:
-            command, channel, ts = parse_slack_output(slack_client.rtm_read()), user
+            command, channel, ts, user = parse_slack_output(slack_client.rtm_read())
             if command and channel:
                 handle_command(command, channel, ts, user)
             time.sleep(READ_WEBSOCKET_DELAY)
