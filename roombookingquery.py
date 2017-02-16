@@ -2,7 +2,7 @@ import webbrowser
 import time
 import datetime
 
-def roombooking(date="0", attendees="0",length="0"):
+def roombooking(date="", attendees="",length=""):
 
 	today = datetime.date.today()
 	thismonday = today - datetime.timedelta(days=today.weekday())
@@ -58,11 +58,9 @@ def roombooking(date="0", attendees="0",length="0"):
 		start_time=0
 		end_time=0
 
-	webbrowser.open("https://app.matrixbooking.com/ui/#/find/rooms/results/{s}/{e}/{l}/{a}/718321/{m}/0/0".format(s=start_time, e=end_time, a=attendees, l =length, m=mystery), new=2, autoraise=True)
+	message = "Click here: https://app.matrixbooking.com/ui/#/find/rooms/results/{s}/{e}/{l}/{a}/718321/{m}/0/0".format(s=start_time, e=end_time, a=attendees, l =length, m=mystery)
 
-	message = "Your search will open in a new window"
-
-	return message
+	print(message)
 
 def roomcleaning(command):
 		command_list = command.split()
@@ -70,15 +68,15 @@ def roomcleaning(command):
 		command_list.remove("a")
 		command_list.remove("room")
 
-		if len(command_list) = 3:
+		if len(command_list) == 3:
 			results = roombooking(command_list[0],command_list[1],command_list[2])
-		elif len(command_list) = 2:
-			results = roombooking(command_list[0],command_list[1],0)
-		elif len(command_list) = 1:
-			results = roombooking(command_list[0],0,0)
-		elif len(command_list) = 0:
-			results = roombooking(0,0,0)
+		elif len(command_list) == 2:
+			results = roombooking(command_list[0],command_list[1],"")
+		elif len(command_list) == 1:
+			results = roombooking(command_list[0],"","")
+		elif len(command_list) == 0:
+			results = roombooking("","","")
 
 		return results
 
-results=roomcleaning(command)
+roomcleaning("book a room")
