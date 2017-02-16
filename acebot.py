@@ -136,7 +136,12 @@ def handle_command(command, channel, ts, user):
             time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
 
     elif command.startswith('book a room'):
-        response = roombooking(command)
+        try:
+            results=roomcleaning(command)
+            for response in results:
+            response = "Your search results have opened in the browser"    
+        except():
+            response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek], [number of people], [length(minutes)]"
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
