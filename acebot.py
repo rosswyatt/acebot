@@ -16,6 +16,7 @@ from benugoMenu import menu, menu_search, halloumi
 from PeopleFinderJR import pf
 from python_help import pyHelp
 from TasksAllocate import shitty_task
+from expert_finder import return_expert
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -106,6 +107,8 @@ def handle_command(command, channel, ts):
     elif command.startswith('python'):
         response=pyHelp(command)
 
+    elif command.startswith('who knows'):
+        response = return_expert(command)
 
     elif command.startswith('pf'):
         response=pf(command)
