@@ -16,11 +16,15 @@ from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from PeopleFinderJR import pf
 from python_help import pyHelp
+
+from Whos_on_what import whos_on_what
 from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
-from stats2 import linker,  
+from stats2 import linker
+from calculator import InputsCalc
+
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -111,6 +115,9 @@ def handle_command(command, channel, ts, user):
     elif command.startswith('python'):
         response=pyHelp(command)
 
+    elif command.startswith('what project'):
+        response = handle_who_what(command)
+
     elif command.startswith('who knows'):
         response = return_expert(command)
     elif command.startswith('i know'):
@@ -136,24 +143,43 @@ def handle_command(command, channel, ts, user):
             response = "Have a lovely journey"
         except(UnboundLocalError, ValueError, urllib.error.HTTPError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+            time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
     elif command.startswith('book a room'):
         try:
             results=roomcleaning(command)
             for response in results:
-            response = "Your search results have opened in the browser"    
+                response = "Your search results have opened in the browser"    
         except():
             response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek] [number of people] [length(minutes)]"
     elif "stats" in command:
         cdummy = command.replace("stats","")
         response = linker(cdummy)
+
+    elif command.startswith("calculate"):
+        response = InputsCalc(command)
+
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+
 
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
 
 # In[ ]:
+
+def handle_who_what(command):
+    proj_text = whos_on_what(command)
+    proj_out = []
+    
+    for i in proj_text:
+        if isinstance(i, list):
+            proj_out.append(' '.join(i))
+        else:
+            proj_out.append(i)
+
+    for i in range(len(proj_out)):
+        slack_client.api_call("chat.postMessage", channel=channel, text=proj_out[i], as_user=True)
+        return "And that's that!"
 
 def ace_song():
     slack_client.api_call("reactions.add", channel=channel, timestamp=ts, name="ace")
