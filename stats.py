@@ -47,10 +47,10 @@ def getTopics():
 	topicArray = []
 	for e in myElements:
     	#topicArray.append(e.text)
-    	print(e.text)
+    	 print(e.text)
 
 
-def getTopicLinks(pubTopicName);
+def getTopicLinks(pubTopicName):
 	allAs = soup.find('h3', text = pubTopicName).findAllNext("a", href = True)
 	allNextAs = soup.find('h3', text = pubTopicName).findNext('h3').findAllNext("a",href = True)
 
@@ -58,6 +58,6 @@ def getTopicLinks(pubTopicName);
 	print("Options are:")
 	for link in myLinks:
 
-    	print(link.text)
-    	print(link["href"])
-    	print("\n")
+    	 print(link.text)
+    	 print(link["href"])
+    	 print("\n")
