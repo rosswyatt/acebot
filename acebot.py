@@ -142,7 +142,7 @@ def handle_command(command, channel, ts, user):
             response = "Have a lovely journey"
         except(UnboundLocalError, ValueError, urllib.error.HTTPError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+            time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
     elif command.startswith('book a room'):
         try:
@@ -157,6 +157,8 @@ def handle_command(command, channel, ts, user):
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
+    elif command.startswith("calculate"):
+        response = InputsCalc(command)
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
 
