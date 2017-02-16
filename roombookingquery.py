@@ -23,10 +23,10 @@ def roombooking(date="0", attendees="0",length="0"):
 	elif date.lower()=="tomorrow":
 		startdate=tomorrow
 		mystery=3
-	elif date.lower()=="this week":
+	elif date.lower()=="thisweek":
 		startdate=thismonday
 		mystery=3
-	elif date.lower()=="next week":
+	elif date.lower()=="nextweek":
 		startdate=nextmonday
 		mystery=3
 	else:
@@ -40,16 +40,16 @@ def roombooking(date="0", attendees="0",length="0"):
 	elif date.lower()=="tomorrow":
 		enddate=tomorrow
 		mystery=3
-	elif date.lower()=="this week":
+	elif date.lower()=="thisweek":
 		enddate=thissunday
 		mystery=3
-	elif date.lower()=="next week":
+	elif date.lower()=="nextweek":
 		enddate=nextsunday
 		mystery=3
 	else:
 		enddate=0
 
-	if date.lower() in ["today","tomorrow","this week","next week"]:
+	if date.lower() in ["today","tomorrow","thisweek","nextweek"]:
 		start = datetime.datetime(startdate.year, startdate.month, startdate.day,0,0,0,0)
 		start_time = int(time.mktime(start.timetuple()))*1000
 		end = datetime.datetime(enddate.year, enddate.month, enddate.day,23,59,59,999)
@@ -63,3 +63,13 @@ def roombooking(date="0", attendees="0",length="0"):
 	message = "Your search will open in a new window"
 
 	return message
+
+def roomcleaning(command):
+		command_list = command.split()
+		command_list.remove("book")
+		command_list.remove("a")
+		command_list.remove("room")
+
+		results = roombooking(command_list[0],command_list[1],command_list[2])
+		return results
+
