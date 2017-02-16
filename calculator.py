@@ -1,8 +1,13 @@
 
 from math import *
+from statistics import *
 
 def InputsCalc(command):
 	calculation = command.replace("calculate ", "")
-	x = eval(calculation)
-	return x
+	try:
+		x = eval(calculation)
+		return x
+	except(SyntaxError, NameError, TypeError):
+		return "Check your syntax. For some help with python, type '@acebot python help'"
+
 

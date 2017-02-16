@@ -78,5 +78,3 @@ def roomcleaning(command):
 			results = roombooking("","","")
 
 		return results
-
-roomcleaning("book a room")
