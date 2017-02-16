@@ -18,6 +18,7 @@ def weather_emoji(command):
 	if len(command_array) == 1:
 		observation = key.weather_at_place('London')
 		current_weather = observation.get_weather().get_status()
+		response = weather_emojis[current_weather]
 	else:
 		command_array.pop(0)
 		location = ' '.join(command_array)
