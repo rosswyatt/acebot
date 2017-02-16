@@ -3,7 +3,7 @@ import datetime
 from bs4 import BeautifulSoup
 import urllib
 import sys
-
+from slackclient import SlackClient
 
 
 def TrainTimes(origin,destination,time_input="09:00",day="today"):
@@ -61,6 +61,8 @@ def CallTrainTimes(command):
 	elif len(command_list) == 2:
 		results = TrainTimes(command_list[0],command_list[1])
 	for response in results:
-
+		#print(response)
 		slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 	sys.exit()
+
+
