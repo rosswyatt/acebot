@@ -11,19 +11,10 @@
 import os
 import time
 import random
-import urllib
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
-from PeopleFinderJR import pf
 from python_help import pyHelp
-
 from Whos_on_what import whos_on_what
-from TasksAllocate import shitty_task
-from expert_finder import return_expert, add_expert
-from randomSong import song_url
-from traintimes import TrainTimes, CallTrainTimes
-from stats import linker 
-
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -42,15 +33,15 @@ def parse_slack_output(slack_rtm_output):
     if output_list and len(output_list) > 0:
         for output in output_list:
             if output and 'text' in output and AT_BOT in output['text']:
-                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts'], output['user']
-    return None, None, None, None
+                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts']
+    return None, None, None
 
 
 # Create a function that handles the bots responses back to the channel.  First it checks to see if certain words, phrases are used.  Depending on the logic statements it will load an answer into the response and post back to channel at the end. (Should maye split this into multiple functions or hold the data in a datasource....)
 
 # In[ ]:
 
-def handle_command(command, channel, ts, user):	
+def handle_command(command, channel, ts):	
     response = "We still need to add this command"
     if command.startswith('show karik'):
         response = "https://ibb.co/goaOgF"
@@ -113,47 +104,10 @@ def handle_command(command, channel, ts, user):
         response = halloumi(eats)
     elif command.startswith('python'):
         response=pyHelp(command)
-
+    
     elif command.startswith('what project'):
         response = handle_who_what(command)
-
-    elif command.startswith('who knows'):
-        response = return_expert(command)
-    elif command.startswith('i know'):
-        response = add_expert(command, user)
-
-    elif command.startswith('pf'):
-        response=pf(command)
-    
-    elif command.startswith('allocate'):
-        response = shitty_task(command)
         
-    elif command.startswith('next holiday'):
-        response = nh()
-
-    elif command.startswith('random song'):
-        response = song_url()
-
-    elif command.startswith("traintimes"):
-        try:
-            results = CallTrainTimes(command)
-            for response in results:
-                slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-            response = "Have a lovely journey"
-        except(UnboundLocalError, ValueError, urllib.error.HTTPError):
-            response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
-
-    elif command.startswith('book a room'):
-        try:
-            results=roomcleaning(command)
-            for response in results:
-            response = "Your search results have opened in the browser"    
-        except():
-            response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek] [number of people] [length(minutes)]"
-    elif "stats" in command:
-        cdummy = command.replace("stats","")
-        response = linker(cdummy)
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
@@ -174,7 +128,9 @@ def handle_who_what(command):
 
     for i in range(len(proj_out)):
         slack_client.api_call("chat.postMessage", channel=channel, text=proj_out[i], as_user=True)
-        return "And that's that!"
+        time.sleep(0.25)
+    
+    return "And that's that!"
 
 def ace_song():
     slack_client.api_call("reactions.add", channel=channel, timestamp=ts, name="ace")
@@ -219,9 +175,9 @@ if __name__ == "__main__":
     if slack_client.rtm_connect():
         print("AceBot connected and running!")
         while True:
-            command, channel, ts, user = parse_slack_output(slack_client.rtm_read())
+            command, channel, ts = parse_slack_output(slack_client.rtm_read())
             if command and channel:
-                handle_command(command, channel, ts, user)
+                handle_command(command, channel, ts)
             time.sleep(READ_WEBSOCKET_DELAY)
 
     else:
