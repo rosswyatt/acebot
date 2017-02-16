@@ -2,7 +2,7 @@ import webbrowser
 import time
 import datetime
 
-def roombooking(date="0", attendees="0",length="0"):
+def roombooking(date="", attendees="",length=""):
 
 	today = datetime.date.today()
 	thismonday = today - datetime.timedelta(days=today.weekday())
@@ -75,8 +75,8 @@ def roomcleaning(command):
 		elif len(command_list) == 2:
 			results = roombooking(command_list[0],command_list[1],0)
 		elif len(command_list) == 1:
-			results = roombooking(command_list[0],0,0)
+			results = roombooking(command_list[0],"","")
 		elif len(command_list) == 0:
-			results = roombooking(0,0,0)
+			results = roombooking("","","")
 
 		return results
