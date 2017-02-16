@@ -37,7 +37,7 @@ def parse_slack_output(slack_rtm_output):
         for output in output_list:
             if output and 'text' in output and AT_BOT in output['text']:
                 return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts'], output['user']
-    return None, None, None
+    return None, None, None, None
 
 
 # Create a function that handles the bots responses back to the channel.  First it checks to see if certain words, phrases are used.  Depending on the logic statements it will load an answer into the response and post back to channel at the end. (Should maye split this into multiple functions or hold the data in a datasource....)
@@ -186,9 +186,9 @@ if __name__ == "__main__":
     if slack_client.rtm_connect():
         print("AceBot connected and running!")
         while True:
-            command, channel, ts = parse_slack_output(slack_client.rtm_read())
+            command, channel, ts = parse_slack_output(slack_client.rtm_read()), user
             if command and channel:
-                handle_command(command, channel, ts)
+                handle_command(command, channel, ts, user)
             time.sleep(READ_WEBSOCKET_DELAY)
 
     else:
