@@ -11,6 +11,7 @@
 import os
 import time
 import random
+import urllib
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from PeopleFinderJR import pf
@@ -117,7 +118,24 @@ def handle_command(command, channel, ts, user):
     
     elif command.startswith('allocate'):
         response = shitty_task(command)
+        
+    elif command.startswith('next holiday'):
+        response = nh()
 
+    elif command.startswith('random song'):
+        response = song_url()
+    elif command.startswith("traintimes"):
+        try:
+            results = CallTrainTimes(command)
+            for response in results:
+                slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+            response = "Have a lovely journey"
+        except(UnboundLocalError, ValueError, urllib.error.HTTPError):
+            response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
+            time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+
+    elif command == "help me book a room":
+        response = roombooking
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 
