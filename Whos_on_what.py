@@ -75,11 +75,11 @@ def whos_on_what(input_text):
                     count_string.append(current_person + " is working on " + str(row["Value"]) + " different projects")
                 elif row["Object"].strip() == "FTE":
                     if row["Value"] > 1.0:
-                        fte_string.append(current_person + " has a FTE of: " + str(row["Value"]) + ". " + " They may be working too hard...")
+                        fte_string.append(current_person + " has a FTE of " + str(row["Value"]) + ". " + "  I think they may be working too hard...")
                     else:
-                        fte_string.append(current_person + " has a FTE of: " + str(row["Value"]))
+                        fte_string.append(current_person + " has a FTE of " + str(row["Value"]))
                 else:
-                    person_projects_string.append(str(row["Object"]) + " for an FTE of: " + str(row["Value"]) + " ")
+                    person_projects_string.append(str(row["Object"]) + " for an FTE of " + str(row["Value"]) + "   ")
 
 
         print_projects = ",".join(person_projects_string)
