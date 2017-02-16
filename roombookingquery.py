@@ -2,17 +2,14 @@ import webbrowser
 import time
 import datetime
 
-def roombooking():
+def roombooking(date="0", attendees="0",length="0"):
+
 	today = datetime.date.today()
 	thismonday = today - datetime.timedelta(days=today.weekday())
 	thissunday = thismonday + datetime.timedelta(days=6)
 	tomorrow = today + datetime.timedelta(days=1)
 	nextmonday = thismonday + datetime.timedelta(days=7)
 	nextsunday = thissunday + datetime.timedelta(days=7)
-
-	date = input('Choose now, today, tomorrow, this week or next week: ', ) or ""
-	attendees = input('Number of attendees (leave blank for any): ',) or ""
-	length = input('Number of minutes (leave blank for any): ',) or ""
 
 	startdate=today
 	enddate=today
