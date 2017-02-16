@@ -25,6 +25,7 @@ from roombookingquery import roombooking, roomcleaning
 from stats import linker 
 from stats2 import linker
 from calculator import InputsCalc
+import prisStats
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -147,6 +148,18 @@ def handle_command(command, channel, ts):
 
     elif command.startswith("calculate"):
         response = InputsCalc(command)
+
+    elif command.startswith("prison population"):
+        k=prisStats.handleResponse(command)
+        if len(k)>10:
+            response = k
+        else:
+            slack_client.api_call("chat.postMessage", channel=channel, text="Total prisoners: " + str(k[0]+k[1]), as_user=True)
+            slack_client.api_call("chat.postMessage", channel=channel, text="Male prisoners: " + str(k[0]), as_user=True)
+            slack_client.api_call("chat.postMessage", channel=channel, text="Female prisoners: " + str(k[1]), as_user=True)
+            response = "Figures correct as of " + str(k[2])
+        if not k[3]:
+            response = "It looks like you were looking for older figures, but I couldn't work out which ones.  Sorry about that."
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
