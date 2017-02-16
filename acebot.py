@@ -141,7 +141,7 @@ def handle_command(command, channel, ts, user):
         try:
             results=roomcleaning(command)
             for response in results:
-            response = "Your search results have opened in the browser"    
+                response = "Your search results have opened in the browser"    
         except():
             response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek] [number of people] [length(minutes)]"
 
