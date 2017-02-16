@@ -33,8 +33,8 @@ def df_to_dictionary (df):
 
     dictionary = {}
     
-    for column in skills_df.columns.tolist():
-        values = [x for x in skills_df[column].tolist() if str(x) != 'nan']
+    for column in df.columns.tolist():
+        values = [x for x in df[column].tolist() if str(x) != 'nan']
         dictionary[column] = values
         
     return dictionary
