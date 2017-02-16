@@ -155,10 +155,12 @@ def handle_command(command, channel, ts, user):
         cdummy = command.replace("stats","")
         response = linker(cdummy)
 
-    slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-
     elif command.startswith("calculate"):
         response = InputsCalc(command)
+        
+    slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+
+
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
 
