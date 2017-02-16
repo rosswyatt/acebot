@@ -167,7 +167,7 @@ def handle_who_what(command):
             proj_out.append(i)
 
     for i in range(len(proj_out)):
-        slack_client.api_call("chat.postMessage", channel=channel, text=proj_out[i], as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=proj_out[i].replace(","," "), as_user=True)
         time.sleep(0.25)
     
     return "And that's that!"
