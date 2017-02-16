@@ -18,6 +18,7 @@ from PeopleFinderJR import pf
 from python_help import pyHelp
 from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
+from randomSong import song_url
 
 BOT_ID = os.environ.get("BOT_ID")
 
