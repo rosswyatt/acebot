@@ -110,7 +110,7 @@ def handle_command(command, channel, ts):
     elif command.startswith('pf'):
         response=pf(command)
     
-    elif command.startwith('allocate'):
+    elif command.startswith('allocate'):
         response = shitty_task(command)
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
