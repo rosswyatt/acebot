@@ -11,7 +11,7 @@ def whos_on_what(input_text):
             found_names.append(i)
         
     # Will need to update this link depending on where the doc is stored
-    people_tracker = xlrd.open_workbook("/Users/dddteam/Documents/Python Projects/Ace_bot/acebot/People_tracker.xls")
+    people_tracker = xlrd.open_workbook("People_tracker.xls")
 
     # Get the first worksheet
     people_sheet = people_tracker.sheet_by_name("People")
