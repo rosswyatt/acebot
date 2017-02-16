@@ -14,6 +14,7 @@ import random
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from python_help import pyHelp
+from Whos_on_what import whos_on_what
 
 BOT_ID = os.environ.get("BOT_ID")
 
