@@ -21,6 +21,8 @@ from expert_finder import return_expert, add_expert
 from weather import weather_emoji
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
+from roombookingquery import roombooking, roomcleaning
+from stats import linker 
 from stats2 import linker
 from calculator import InputsCalc
 
