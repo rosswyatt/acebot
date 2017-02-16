@@ -1,10 +1,8 @@
 
 import datetime
-import mechanicalsoup
 from bs4 import BeautifulSoup
 import urllib
-from lxml import html
-
+import sys
 
 
 
@@ -28,7 +26,6 @@ def TrainTimes(origin,destination,time_input="09:00",day="today"):
 	
 	# create url	
 	url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
-	print(url)
 
 	# pull the page, if error, try the origin with London prefix
 	try:
@@ -49,9 +46,21 @@ def TrainTimes(origin,destination,time_input="09:00",day="today"):
 		try:
 			journeys.append(journey_time + " " + late_list[0])
 		except(IndexError):
-			journeys.append(journey_time)
+			journeys.append(journey_time + " On time")
 	return journeys
 
-journey = TrainTimes("Victoria","Brighton",time_input="15:15")
+def CallTrainTimes(command):
+	command_list = command.split()
+	
+	command_list.remove("traintimes")
 
-print(journey)
+	if len(command_list) == 4:
+		results = TrainTimes(command_list[0],command_list[1],command_list[2],command_list[3])
+	if len(command_list) == 3:
+		results = TrainTimes(command_list[0],command_list[1],command_list[2])
+	elif len(command_list) == 2:
+		results = TrainTimes(command_list[0],command_list[1])
+	for response in results:
+
+		slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+	sys.exit()
