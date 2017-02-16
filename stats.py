@@ -32,6 +32,7 @@ def getlatest(url):
     link = res[1].contents[1].get("href")
     return "http://www.gov.uk" + link
 
+# lets do something
 def linker(term):
     f = fuzzy_match(term,vec)
     if len(f) == 1:
