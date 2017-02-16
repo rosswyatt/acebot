@@ -18,6 +18,7 @@ from PeopleFinderJR import pf
 from python_help import pyHelp
 from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
+from weather import weather_emoji
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -80,8 +81,8 @@ def handle_command(command, channel, ts, user):
     elif 'pie chart' in command:
         response = "AceBot is disgusted by pie charts.  They are held in the same regard as the name DaSH."
 
-    elif 'weather' in command:
-        response = "It is always sunny in the land of ACE."
+    elif command.startswith('weather'):
+        response = weather_emoji(command)
 
     elif command.startswith('magic8'):
     	response = magic_8()
