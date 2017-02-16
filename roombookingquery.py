@@ -10,9 +10,9 @@ def roombooking():
 	nextmonday = thismonday + datetime.timedelta(days=7)
 	nextsunday = thissunday + datetime.timedelta(days=7)
 
-	date = raw_input('Choose now, today, tomorrow, this week or next week: ', ) or ""
-	attendees = raw_input('Number of attendees (leave blank for any): ',) or ""
-	length = raw_input('Number of minutes (leave blank for any): ',) or ""
+	date = input('Choose now, today, tomorrow, this week or next week: ', ) or ""
+	attendees = input('Number of attendees (leave blank for any): ',) or ""
+	length = input('Number of minutes (leave blank for any): ',) or ""
 
 	startdate=today
 	enddate=today

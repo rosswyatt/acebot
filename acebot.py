@@ -17,11 +17,7 @@ from benugoMenu import menu, menu_search, halloumi
 from PeopleFinderJR import pf
 from python_help import pyHelp
 from TasksAllocate import shitty_task
-from expert_finder import return_expert
-from next_holiday import nh
-from randomSong import song_url, play_song, get_song_list
-from traintimes import TrainTimes, CallTrainTimes
-from roombookingquery import roombooking
+from expert_finder import return_expert, add_expert
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -40,7 +36,7 @@ def parse_slack_output(slack_rtm_output):
     if output_list and len(output_list) > 0:
         for output in output_list:
             if output and 'text' in output and AT_BOT in output['text']:
-                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts']
+                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts'], output['user']
     return None, None, None
 
 
@@ -48,7 +44,7 @@ def parse_slack_output(slack_rtm_output):
 
 # In[ ]:
 
-def handle_command(command, channel, ts):	
+def handle_command(command, channel, ts, user):	
     response = "We still need to add this command"
     if command.startswith('show karik'):
         response = "https://ibb.co/goaOgF"
@@ -114,13 +110,15 @@ def handle_command(command, channel, ts):
 
     elif command.startswith('who knows'):
         response = return_expert(command)
+    elif command.startswith('who knows'):
+        response = add_expert(command, user)
 
     elif command.startswith('pf'):
         response=pf(command)
     
     elif command.startswith('allocate'):
         response = shitty_task(command)
-    
+        
     elif command.startswith('next holiday'):
         response = nh()
 
@@ -138,10 +136,7 @@ def handle_command(command, channel, ts):
 
     elif command == "help me book a room":
         response = roombooking
-
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-
-
 
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
