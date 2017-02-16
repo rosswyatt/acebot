@@ -20,7 +20,7 @@ from expert_finder import return_expert
 from next_holiday import nh
 from randomSong import song_url, play_song, get_song_list
 from traintimes import TrainTimes, CallTrainTimes
-
+from roombookingquery import roombooking
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -131,7 +131,12 @@ def handle_command(command, channel, ts):
         except(UnboundLocalError, ValueError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
             time in 24hr e.g. 15:00, date in format yyyy/mm/dd"
+            
+    elif command == "help me book a room":
+        response = roombooking
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+
+
 
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
