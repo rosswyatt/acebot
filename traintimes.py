@@ -60,9 +60,5 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1],command_list[2])
 	elif len(command_list) == 2:
 		results = TrainTimes(command_list[0],command_list[1])
-	for response in results:
-		#print(response)
-		slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-	sys.exit()
-
+	return results
 
