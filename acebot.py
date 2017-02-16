@@ -18,6 +18,7 @@ from python_help import pyHelp
 from TasksAllocate import shitty_task
 from expert_finder import return_expert
 from next_holiday import nh
+from randomSong import song_url, play_song, get_song_list
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -119,6 +120,9 @@ def handle_command(command, channel, ts):
     
     elif command.startswith('next holiday'):
         response = nh()
+
+    elif command.startswith('random song'):
+        response = song_url()
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
