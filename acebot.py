@@ -105,6 +105,9 @@ def handle_command(command, channel, ts):
         response=pyHelp(command)
 
 
+    elif command.startswith('pf'):
+        repsonse=pf(command)
+        
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
