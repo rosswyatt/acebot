@@ -15,6 +15,7 @@ from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from PeopleFinderJR import pf
 from python_help import pyHelp
+from TasksAllocate import shitty_task
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -108,7 +109,9 @@ def handle_command(command, channel, ts):
 
     elif command.startswith('pf'):
         response=pf(command)
-        
+    
+    elif command.startwith('allocate'):
+        response = shitty_task(command)
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
