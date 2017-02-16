@@ -109,7 +109,7 @@ def handle_command(command, channel, ts, user):
 
     elif command.startswith('who knows'):
         response = return_expert(command)
-    elif command.startswith('who knows'):
+    elif command.startswith('i know'):
         response = add_expert(command, user)
 
     elif command.startswith('pf'):
