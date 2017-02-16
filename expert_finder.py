@@ -1,10 +1,16 @@
 # Code to return a list of names of who in the team knows a certain skill.
 import pandas as pd
 
-def return_expert (skill):
-	'''Function which searches skills matrix for experts, returning their names.'''
+def return_expert (command):
+    '''Function which searches skills matrix for experts, returning their names.'''
 
-	skills_df = pd.read_csv('/Users/admin/Documents/Away_Days/acebot/skills_matrix.csv')
+    skill = str.lower(command).split(' ')[2]
+    
+    skills_df = pd.read_csv('/Users/admin/Documents/Away_Days/acebot/skills_matrix.csv')
+
+    for column in skills_df.columns.tolist():
+        if str.lower(column) == skill:
+            skill = column
 
     try:
         experts = skills_df[skill].dropna().tolist()
