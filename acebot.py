@@ -13,6 +13,7 @@ import time
 import random
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
+from PeopleFinderJR import pf
 from python_help import pyHelp
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -106,7 +107,7 @@ def handle_command(command, channel, ts):
 
 
     elif command.startswith('pf'):
-        repsonse=pf(command)
+        response=pf(command)
         
 
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
