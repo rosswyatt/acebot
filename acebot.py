@@ -20,6 +20,7 @@ from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
+from stats import linker 
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -126,6 +127,7 @@ def handle_command(command, channel, ts, user):
 
     elif command.startswith('random song'):
         response = song_url()
+
     elif command.startswith("traintimes"):
         try:
             results = CallTrainTimes(command)
@@ -136,8 +138,16 @@ def handle_command(command, channel, ts, user):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
             time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
-    elif command == "help me book a room":
-        response = roombooking
+    elif command.startswith('book a room'):
+        try:
+            results=roomcleaning(command)
+            for response in results:
+            response = "Your search results have opened in the browser"    
+        except():
+            response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek] [number of people] [length(minutes)]"
+    elif "stats" in command:
+        cdummy = command.replace("stats","")
+        response = linker(cdummy)
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 

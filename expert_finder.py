@@ -22,7 +22,7 @@ def return_expert (command):
             elif len(experts) == 1:
                 response = experts[0]
             else:
-                response = ', '.join(experts)
+                response = ', '.join(experts) + ' know ' + skill
         except:
             response = "acebot hasn't heard of " + skill
 
@@ -41,7 +41,11 @@ def df_to_dictionary (df):
 
 def add_expert (command, user):
     '''Function that adds user to skills matrix.
-    Works by converting the dataframe to a dictionary and updating the values in that dicitonary.'''
+    Works by converting the dataframe to a dictionary and updating the values in that dictionary.'''
+
+    forename = user.profile.first_name
+    surname = user.profile.last_name
+    full_name = str(forename) + str(surname)
 
     command_array = str.lower(command).split(' ')
     if len(command_array) < 3:
@@ -54,10 +58,10 @@ def add_expert (command, user):
     
         try:
             experts = skills_dictionary[skill]
-            experts.append(str(user))
+            experts.append(full_name)
             skills_dictionary[skill] = experts
         except:
-            skills_dictionary[skill] = [str(user)]
+            skills_dictionary[skill] = [full_name]
         
         skills_df = pd.DataFrame.from_dict(skills_dictionary, orient='index').transpose()
         skills_df.to_csv('./csv_inputs/skills_matrix.csv', index=False)
