@@ -23,6 +23,7 @@ from expert_finder import return_expert, add_expert
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
 from stats import linker 
+from calculator import InputsCalc
 
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -157,7 +158,7 @@ def handle_command(command, channel, ts, user):
 
     elif command.startswith("calculate"):
         response = InputsCalc(command)
-        
+
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 
