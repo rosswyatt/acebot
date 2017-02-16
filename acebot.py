@@ -105,7 +105,7 @@ def handle_command(command, channel, ts):
     elif command.startswith('python'):
         response=pyHelp(command)
     
-    elif command.startswith('what project is'):
+    elif command.startswith('what project'):
         response = handle_who_what(command)
         
 
