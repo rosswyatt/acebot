@@ -127,10 +127,14 @@ def handle_command(command, channel, ts):
         response = song_url()
     elif command.startswith("traintimes"):
         CallTrainTimes(command)
-    slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-
+    
     elif command == "help me book a room":
         response = roombooking()
+
+
+    slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+
+
 
 
 # This function outputs the ACE song.  It put out the three letter and then sends the last command back to the main function to output.
