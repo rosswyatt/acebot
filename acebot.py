@@ -146,8 +146,8 @@ def handle_command(command, channel, ts):
         cdummy = command.replace("stats","")
         response = linker(cdummy)
 
-    elif command.startswith("calculate"):
-        response = InputsCalc(command)
+    # elif command.startswith("calculate"):
+        # response = InputsCalc(command)
 
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
