@@ -16,7 +16,6 @@ from benugoMenu import menu, menu_search, halloumi
 from python_help import pyHelp
 from Whos_on_what import whos_on_what
 from next_holiday import nh
-
 from TasksAllocate import shitty_task
 from expert_finder import return_expert, add_expert
 from weather import weather_emoji
@@ -149,6 +148,9 @@ def handle_command(command, channel, ts):
 
     elif command.startswith("calculate"):
         response = "The calculator has been disabled due to abuse, sorry"
+
+    elif command.startswith("allocate"):
+        response=shitty_task(command)
 
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
