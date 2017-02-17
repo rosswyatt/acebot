@@ -58,11 +58,9 @@ def roombooking(date="", attendees="",length=""):
 		start_time=0
 		end_time=0
 
-	webbrowser.open("https://app.matrixbooking.com/ui/#/find/rooms/results/{s}/{e}/{l}/{a}/718321/{m}/0/0".format(s=start_time, e=end_time, a=attendees, l =length, m=mystery), new=2, autoraise=True)
+	message = "Click here: https://app.matrixbooking.com/ui/#/find/rooms/results/{s}/{e}/{l}/{a}/718321/{m}/0/0".format(s=start_time, e=end_time, a=attendees, l =length, m=mystery)
 
-	message = "Your search will open in a new window"
-
-	return message
+	print(message)
 
 def roomcleaning(command):
 		command_list = command.split()
@@ -73,7 +71,7 @@ def roomcleaning(command):
 		if len(command_list) == 3:
 			results = roombooking(command_list[0],command_list[1],command_list[2])
 		elif len(command_list) == 2:
-			results = roombooking(command_list[0],command_list[1],0)
+			results = roombooking(command_list[0],command_list[1],"")
 		elif len(command_list) == 1:
 			results = roombooking(command_list[0],"","")
 		elif len(command_list) == 0:
