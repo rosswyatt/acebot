@@ -14,10 +14,14 @@ def get_song_list():
     return ['{0} {1}'.format(a, t) for a, t in zip(artists, titles)]
 
 def play_song(search_term):
-    '''Play song in YouTube.'''
-    URL = ("https://www.google.com/search?btnI=I'm+Feeling+Lucky&ie=UTF-8"
-           "&oe=UTF-8&q=site:youtube.com%20inurl:http://www.youtube.com/"
-           "watch?v=%20{0}".format(search_term))
+    '''Create song link for YouTube.'''
+    Temp = "{0}".format(search_term)
+    Temp = Temp.replace("b'", "")
+    Temp = Temp.replace("'", "")
+    Temp = Temp.replace(" ", "%20")
+
+    URL = "https://duckduckgo.com/?q=!ducky+" + Temp + "+site%3Ayoutube.com"
+
     return URL
 
 def song_url():
