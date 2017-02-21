@@ -8,4 +8,4 @@ def shitty_task(command):
 	else:
 		members = ["@jonroberts", "@samtazzyman", "@robin_linacre", "@ross_wyatt", "@danjones", "@daniel_hills", "@karik.isichei", "@gkelly", "@hayden_sansum", "@bfortescue", "@vickyhughes", "@apoulton"]
 
-	return "The winner is " + random.choice(members)
+	return "The winner is <" + random.choice(members) + ">"
