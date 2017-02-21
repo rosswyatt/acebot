@@ -1,1 +1,1 @@
-web: gunicorn acebot.py --log-file -
+web: python3 acebot.py --log-file -
