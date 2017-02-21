@@ -1,1 +1,2 @@
-web: python3 acebot.py --log-file -
+web: python3 -m http.server $PORT
+worker: python3 acebot.py
