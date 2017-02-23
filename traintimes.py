@@ -1,7 +1,7 @@
 
 import datetime
 from bs4 import BeautifulSoup
-import urllib
+from urllib import urlopen
 import sys
 
 
