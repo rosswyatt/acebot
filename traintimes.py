@@ -31,11 +31,11 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 
 	# pull the page, if error, try the origin with London prefix
 	try:
-		page = urlopen(url).read()
-	except(error.HTTPError):
+		page = urllib.request.urlopen(url).read()
+	except(urllib.error.HTTPError):
 		origin = "London " + origin
 		url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
-		page = urlopen(url).read()
+		page = urllib.request.urlopen(url).read()
 	soup = BeautifulSoup(page, "html.parser")
 
 	# get first 5 trains
