@@ -148,12 +148,12 @@ def handle_command(command, channel, ts):
 
     elif command.startswith("calculate"):
         response = "The calculator has been disabled due to abuse, sorry"
-
+    
+    elif command.startswith("allocate  "):
+        response = "The winner is <@apoulton>"
     elif command.startswith("allocate"):
         response=shitty_task(command)
 
-    elif command.startswith(" allocate"):
-        response = "The winner is <@apoulton>"
 
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
