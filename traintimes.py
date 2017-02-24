@@ -1,9 +1,9 @@
 
 import datetime
 from bs4 import BeautifulSoup
-import urllib
-import sys
 
+import sys
+import requests
 
 
 def TrainTimes(origin,destination,time_input="now",day="today"):
@@ -30,13 +30,8 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
 
 	# pull the page, if error, try the origin with London prefix
-	try:
-		page = urllib.request.urlopen(url).read()
-	except(urllib.error.HTTPError):
-		origin = "London " + origin
-		url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
-		page = urllib.request.urlopen(url).read()
-	soup = BeautifulSoup(page, "html.parser")
+	page = requests.get(url)
+	soup = BeautifulSoup(page.content, "html.parser")
 
 	# get first 5 trains
 	journeys = []
@@ -58,10 +53,14 @@ def CallTrainTimes(command):
 
 	if len(command_list) == 4:
 		results = TrainTimes(command_list[0],command_list[1],command_list[2],command_list[3])
-	if len(command_list) == 3:
+	elif len(command_list) == 3:
 		results = TrainTimes(command_list[0],command_list[1],command_list[2])
 	elif len(command_list) == 2:
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
+
+#x = CallTrainTimes("traintimes Derby Edinburgh")
+#print(x)
+
 
 
