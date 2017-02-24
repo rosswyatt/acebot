@@ -59,8 +59,8 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-x = CallTrainTimes("traintimes Derby Edinburgh")
-print(x)
+#x = CallTrainTimes("traintimes Derby Edinburgh")
+#print(x)
 
 
 
