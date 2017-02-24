@@ -10,7 +10,7 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	# if time is set to now, make time equal to nearest 15 min
 	if time_input == "now":
 		tm = datetime.datetime.now()
-		tm = tm - datetime.timedelta(minutes=tm.minute % 15,
+		tm = tm + datetime.timedelta(minutes=tm.minute % 15,
 	                             seconds=tm.second,
 	                             microseconds=tm.microsecond)
 		tm = str(tm)
@@ -59,8 +59,8 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-#x = CallTrainTimes("traintimes Derby Edinburgh")
-#print(x)
+x = CallTrainTimes("traintimes Derby Edinburgh")
+print(x)
 
 
 
