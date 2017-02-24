@@ -11,6 +11,7 @@
 import os
 import time
 import random
+import urllib
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from python_help import pyHelp
@@ -26,6 +27,7 @@ from stats import linker
 from stats2 import linker
 from calculator import InputsCalc
 import prisStats
+
 
 BOT_ID = os.environ.get("BOT_ID")
 
@@ -150,7 +152,7 @@ def handle_command(command, channel, ts):
         response = "The calculator has been disabled due to abuse, sorry"
     
     elif command.startswith("allocate  "):
-        response = "The winner is <@apoulton>"
+        response = "The winner is <@apoulton> again"
     elif command.startswith("allocate"):
         response=shitty_task(command)
 
