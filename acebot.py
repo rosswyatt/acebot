@@ -11,7 +11,6 @@
 import os
 import time
 import random
-import urllib
 from slackclient import SlackClient
 from benugoMenu import menu, menu_search, halloumi
 from python_help import pyHelp
@@ -132,8 +131,8 @@ def handle_command(command, channel, ts):
             results = CallTrainTimes(command)
             for response in results:
                 slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
-            response = "Have a lovely journey"
-        except(UnboundLocalError, ValueError, urllib.error.HTTPError):
+            response = "Safe travels"
+        except(UnboundLocalError, ValueError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
             time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
 
