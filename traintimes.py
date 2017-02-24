@@ -1,9 +1,9 @@
 
 import datetime
 from bs4 import BeautifulSoup
-
+from urllib.request import urlopen
 import sys
-import requests
+
 
 
 def TrainTimes(origin,destination,time_input="now",day="today"):
@@ -30,8 +30,8 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
 
 	# pull the page, if error, try the origin with London prefix
-	page = requests.get(url)
-	soup = BeautifulSoup(page.content, "html.parser")
+	page = urlopen(url).read()
+	soup = BeautifulSoup(page, "html.parser")
 
 	# get first 5 trains
 	journeys = []
