@@ -69,9 +69,15 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 		d = re.sub('Alternativetrains', '', d)
 		Delay.append(d)
 
+	Fares = ["Fare"]
+	for hit in soup.findAll(attrs={'class' : 'opsingle'}):
+		d = re.sub('\s+', ' ', hit.text)
+		Fares.append(d)
+
+
 	SendToAceBot = []
-	for ori, des, dep, arr, dur, dela in zip(Origins, Destinations, Departs, Arrives,Duration, Delay):
-		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr + ' ' + dur + ' ' + dela)
+	for ori, des, dep, arr, dur, dela, pri in zip(Origins, Destinations, Departs, Arrives,Duration, Delay, Fares):
+		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr + ' ' + dur + ' ' + dela + ' ' + pri)
 	return SendToAceBot
 	'''
 	# get first 5 trains
@@ -100,8 +106,8 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-x = CallTrainTimes("traintimes London Dartford 18:15")
-print(x)
+#x = CallTrainTimes("traintimes London Dartford 18:15")
+#print(x)
 
 
 
