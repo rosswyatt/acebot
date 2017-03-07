@@ -35,13 +35,13 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	page = urlopen(url).read()
 	soup = BeautifulSoup(page, "html.parser")
 
-	Origins = ["Origin"]
+	Origins = ["  Origin  "]
 	for hit in soup.findAll(attrs={'class' : 'from'}):
 		if hit.text != "From" and hit.text != '':
 			d = re.sub('\s+', ' ', hit.text)
 			Origins.append(d)
 
-	Destinations = ["Destination"]
+	Destinations = ["  Destination  "]
 	for hit in soup.findAll(attrs={'class' : 'to'}):
 		if hit.text != "To" and hit.text != '':
 			d = re.sub('\s+', ' ', hit.text)
