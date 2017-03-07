@@ -52,10 +52,12 @@ def handleResponse(y):
 	x=0
 	findWeek = True
 	digiFind = re.search("\d", y.lower())
+	dateFind = re.search("\d{1,2}\/\d{1,2}(\/\d{2,4})?|\d{1,2}([a-z]{2})? \w{1,20}( \d{2,4})?",y.lower())
 	if len(y) > len("prison population"):
 		findWeek = False
 	if digiFind:
 		x = int(digiFind.group(0))
+		findWeek = True
 	elif "1"in y.lower()  or "one" in y.lower() or "last" in y.lower():
 		x = 1
 		findWeek = True
@@ -74,6 +76,7 @@ def handleResponse(y):
 	if "year" in y.lower():
 		x=x*52
 		findWeek = True
+	print(x)
 	return link(x,findWeek)
 
 
