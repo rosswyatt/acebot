@@ -3,7 +3,7 @@ import datetime
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import sys
-
+import re
 
 
 def TrainTimes(origin,destination,time_input="now",day="today"):
@@ -15,6 +15,7 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	                             microseconds=tm.microsecond)
 		tm = str(tm)
 		tm = tm[11:16]
+		tm = tm.replace(":", "")
 		time_input = tm
 		
 	# otherwise, take input and set it to the nearest 15 min
@@ -25,14 +26,54 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	                             microseconds=tm.microsecond)
 		tm = str(tm)
 		tm = tm[11:16]
-	
+		tm = tm.replace(":", "")
+		time_input = tm
 	# create url	
-	url= "http://traintimes.org.uk/"+origin+"/"+destination+"/"+time_input+"/"+day
+	url= "http://ojp.nationalrail.co.uk/service/timesandfares/"+origin+"/"+destination+"/"+day+"/"+time_input+"/dep"
 
 	# pull the page, if error, try the origin with London prefix
 	page = urlopen(url).read()
 	soup = BeautifulSoup(page, "html.parser")
 
+	Origins = ["Origin"]
+	for hit in soup.findAll(attrs={'class' : 'from'}):
+		if hit.text != "From" and hit.text != '':
+			d = re.sub('\s+', ' ', hit.text)
+			Origins.append(d)
+
+	Destinations = ["Destination"]
+	for hit in soup.findAll(attrs={'class' : 'to'}):
+		if hit.text != "To" and hit.text != '':
+			d = re.sub('\s+', ' ', hit.text)
+			Destinations.append(d)
+
+	Departs = ["Departs"]
+	for hit in soup.findAll(attrs={'class' : 'dep'}):
+		if hit.text != "Dep.":
+			d = re.sub('\s+', ' ', hit.text)
+			Departs.append(d)
+
+	Arrives = ["Arrives"]
+	for hit in soup.findAll(attrs={'class' : 'arr'}):
+		if hit.text != "Arr.":
+			d = re.sub('\s+', ' ', hit.text)
+			Arrives.append(d)
+
+	Duration = ["Duration"]
+	for d,a in zip(Departs[1:6], Arrives[1:6]):
+		Duration.append(str(datetime.datetime.strptime(a,"%H:%M") - datetime.datetime.strptime(d,"%H:%M")))
+	
+	Delay = ["Delay"]
+	for hit in soup.findAll(attrs={'class' : 'journey-status'}):
+		d = re.sub('\s+', ' ', hit.text)
+		d = re.sub('Alternativetrains', '', d)
+		Delay.append(d)
+
+	SendToAceBot = []
+	for ori, des, dep, arr, dur, dela in zip(Origins, Destinations, Departs, Arrives,Duration, Delay):
+		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr + ' ' + dur + ' ' + dela)
+	return SendToAceBot
+	'''
 	# get first 5 trains
 	journeys = []
 	for i in range(0,5):
@@ -45,7 +86,7 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 		except(IndexError):
 			journeys.append(journey_time + " On time")
 	return journeys
-
+	'''
 def CallTrainTimes(command):
 	command_list = command.split()
 	
@@ -59,8 +100,8 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-#x = CallTrainTimes("traintimes Derby Edinburgh")
-#print(x)
+x = CallTrainTimes("traintimes London Dartford 18:15")
+print(x)
 
 
 
