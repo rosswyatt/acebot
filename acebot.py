@@ -134,7 +134,7 @@ def handle_command(command, channel, ts):
             response = "Safe travels"
         except(UnboundLocalError, ValueError):
             response ="For train times, type traintimes [origin destination time(optional) date(optional)] \
-            time in 24hr e.g. 15:00, date in format yyyy-mm-dd"
+            time in 24hr e.g. 15:00, date in format ddmmyy"
 
     elif command.startswith('book a room'):
         try:
