@@ -76,11 +76,16 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 		d = re.sub('\s+', ' ', hit.text)
 		Fares.append("Fare: %s" % d)
 
+	Changes = []
+	for hit in soup.findAll(attrs={'class' : 'chg'}):
+		if hit.text != "Chg.":
+			d = re.sub('\s+', ' ', hit.text)
+			Changes.append("Changes: %s" % d)
 
 	SendToAceBot = []
-	for ori, des, dep, arr, dur, dela, pri in zip(Origins, Destinations, Departs, Arrives,Duration, Delay, Fares):
+	for ori, des, dep, arr, dur, dela, pri, chg in zip(Origins, Destinations, Departs, Arrives,Duration, Delay, Fares, Changes):
 		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr)
-		SendToAceBot.append(dur + ' ' + dela + ' ' + pri)
+		SendToAceBot.append(dur + ' ' + dela + ' ' + pri + ' ' + chg)
 	return SendToAceBot
 	'''
 	# get first 5 trains
