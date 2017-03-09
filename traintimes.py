@@ -68,7 +68,7 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	Delay = []
 	for hit in soup.findAll(attrs={'class' : 'journey-status'}):
 		d = re.sub('\s+', ' ', hit.text)
-		d = re.sub('Alternativetrains', '', d)
+		d = re.sub('Alternative trains', '', d)
 		Delay.append("Status: %s" % d)
 
 	Fares = []
@@ -114,8 +114,8 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-#x = CallTrainTimes("traintimes London Brigton")
-#print(x)
+x = CallTrainTimes("traintimes London Doncaster 16:00")
+print(x)
 
 
 
