@@ -21,7 +21,7 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	# otherwise, take input and set it to the nearest 15 min
 	else:
 		tm = datetime.datetime.strptime(time_input,"%H:%M")
-		tm = tm - datetime.timedelta(minutes=tm.minute % 15,
+		tm = tm + datetime.timedelta(minutes=tm.minute % 15,
 	                             seconds=tm.second,
 	                             microseconds=tm.microsecond)
 		tm = str(tm)
