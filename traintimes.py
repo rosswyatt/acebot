@@ -35,49 +35,52 @@ def TrainTimes(origin,destination,time_input="now",day="today"):
 	page = urlopen(url).read()
 	soup = BeautifulSoup(page, "html.parser")
 
-	Origins = ["Origin "]
+	Origins = []
 	for hit in soup.findAll(attrs={'class' : 'from'}):
 		if hit.text != "From" and hit.text != '':
 			d = re.sub('\s+', ' ', hit.text)
+			d = re.sub(r'\[[A-Z]{3}\]','', d)
 			Origins.append(d)
 
-	Destinations = ["Destination "]
+	Destinations = []
 	for hit in soup.findAll(attrs={'class' : 'to'}):
 		if hit.text != "To" and hit.text != '':
 			d = re.sub('\s+', ' ', hit.text)
+			d = re.sub(r'\[[A-Z]{3}\]','', d)
 			Destinations.append(d)
 
-	Departs = ["Departs"]
+	Departs = []
 	for hit in soup.findAll(attrs={'class' : 'dep'}):
 		if hit.text != "Dep.":
 			d = re.sub('\s+', ' ', hit.text)
 			Departs.append(d)
 
-	Arrives = ["Arrives"]
+	Arrives = []
 	for hit in soup.findAll(attrs={'class' : 'arr'}):
 		if hit.text != "Arr.":
 			d = re.sub('\s+', ' ', hit.text)
 			Arrives.append(d)
 
-	Duration = ["Duration"]
+	Duration = []
 	for d,a in zip(Departs[1:6], Arrives[1:6]):
-		Duration.append(str(datetime.datetime.strptime(a,"%H:%M") - datetime.datetime.strptime(d,"%H:%M")))
+		Duration.append("Duration: %s" % str(datetime.datetime.strptime(a,"%H:%M") - datetime.datetime.strptime(d,"%H:%M")))
 	
-	Delay = ["Delay"]
+	Delay = []
 	for hit in soup.findAll(attrs={'class' : 'journey-status'}):
 		d = re.sub('\s+', ' ', hit.text)
 		d = re.sub('Alternativetrains', '', d)
-		Delay.append(d)
+		Delay.append("Status: %s" % d)
 
-	Fares = ["Fare"]
+	Fares = []
 	for hit in soup.findAll(attrs={'class' : 'opsingle'}):
 		d = re.sub('\s+', ' ', hit.text)
-		Fares.append(d)
+		Fares.append("Fare: %s" % d)
 
 
 	SendToAceBot = []
 	for ori, des, dep, arr, dur, dela, pri in zip(Origins, Destinations, Departs, Arrives,Duration, Delay, Fares):
-		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr + ' ' + dur + ' ' + dela + ' ' + pri)
+		SendToAceBot.append(ori + ' ' + des + ' ' + dep + ' ' + arr)
+		SendToAceBot.append(dur + ' ' + dela + ' ' + pri)
 	return SendToAceBot
 	'''
 	# get first 5 trains
@@ -106,7 +109,7 @@ def CallTrainTimes(command):
 		results = TrainTimes(command_list[0],command_list[1])
 	return results
 
-#x = CallTrainTimes("traintimes LondonBridge Dartford 18:15")
+#x = CallTrainTimes("traintimes London Brigton")
 #print(x)
 
 
