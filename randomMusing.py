@@ -9,20 +9,25 @@ Created on Tue Jun  6 20:51:15 2017
 
 import random
 
-technique = ['D3',
+
+
+
+def random_musings():
+
+    technique = ['D3',
              'tableau',
              'python',
              'r'
              ]
 
-talking_point = ['Automated Testing',
+    talking_point = ['Automated Testing',
                  'AQA templates',
                  'Google Analytics',
                  'Blog Posts',
                  'user stories'
                  ]
 
-dash_member = ['Ross',
+    dash_member = ['Ross',
                'Andy',
                'Vicky',
                'Robin',
@@ -30,12 +35,10 @@ dash_member = ['Ross',
                 ]
 
 
-doing_phrase = ["what's happening with the",
+    doing_phrase = ["what's happening with the",
           "have you started doing your",
         ]
 
-
-def random_musings():
     a = random.random()
     who = random.choice(dash_member)
     if a > 0.5:        

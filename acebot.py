@@ -62,8 +62,6 @@ def handle_command(command, channel, ts):
     elif command.startswith('ace song'):
         response = ace_song()
 
-    elif command.startswith('web'):
-        response = r"\\dom1\data\hq\102pf\shared\group_lcdshd2\analytical services\cicfas\teams\ace\projects\20 ddd frontpage - discovery-alpha\datainput\index.html"
     elif command.startswith('file link'):
         response = r"\\dom1\data\hq\102pf\shared\group_lcdshd2\analytical services\cicfas\teams\ace" + "\\" + command[10:]
     elif command =="tumbleweed":
@@ -230,7 +228,7 @@ def magic_8():
 
 def help():
 	slack_client.api_call("chat.postMessage", channel=channel, text="Documents - doc library, coding doc, folder doc, learn python, learn R, data security, software doc, webpage, it number", as_user=True)
-	slack_client.api_call("chat.postMessage", channel=channel, text="Links - web, file link, github", as_user=True)
+	slack_client.api_call("chat.postMessage", channel=channel, text="Links - file link, github", as_user=True)
 	return "Other - ace song, weather, magic8, show karik, pie chart, tumbleweed, dsh, dash"
 
 
