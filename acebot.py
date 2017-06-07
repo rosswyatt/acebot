@@ -159,7 +159,7 @@ def handle_command(command, channel, ts):
         response=shitty_task(command)
 
     elif command.startswith("what do you think"):
-        response=randomMusing()
+        response=random_musing()
 
 
     elif command.startswith("prison population"):
