@@ -26,6 +26,7 @@ from stats import linker
 from stats2 import linker
 from calculator import InputsCalc
 import prisStats
+import randomMusing
 
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -82,6 +83,10 @@ def handle_command(command, channel, ts):
         response = "https://docs.google.com/document/d/1avLqSnh6cB5FFktr1PZZbWTstkuWlGOHGBLeREA_ow4/edit?pli=1"
     elif command.startswith('data security'):
         response = r"\\dom1\data\hq\102pf\shared\group_lcdshd2\analytical services\cicfas\teams\ace\policies\20160712 data security and the macbook platform final.doc"
+    elif command.startswith('webpage'):
+        response = "http://dash.mojanalytics.xyz/"
+    elif command.startswith('it number'):
+        response = "0800 783 0162"
 
     elif 'dsh' in command or 'dash' in command:
         response = "AceBot does not recognise this team name.  Please use 'ACE' or 'the team formerly known as ACE' when talking to me"
@@ -155,6 +160,9 @@ def handle_command(command, channel, ts):
     elif command.startswith("allocate"):
         response=shitty_task(command)
 
+    elif command.startswith("what do you think"):
+        response=randomMusing()
+
 
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
@@ -221,7 +229,7 @@ def magic_8():
 # In[ ]:
 
 def help():
-	slack_client.api_call("chat.postMessage", channel=channel, text="Documents - doc library, coding doc, folder doc, learn python, learn R, data security, software doc", as_user=True)
+	slack_client.api_call("chat.postMessage", channel=channel, text="Documents - doc library, coding doc, folder doc, learn python, learn R, data security, software doc, webpage, it number", as_user=True)
 	slack_client.api_call("chat.postMessage", channel=channel, text="Links - web, file link, github", as_user=True)
 	return "Other - ace song, weather, magic8, show karik, pie chart, tumbleweed, dsh, dash"
 
