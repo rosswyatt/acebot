@@ -9,9 +9,6 @@ Created on Tue Jun  6 20:51:15 2017
 
 import random
 
-
-
-
 def random_musings():
 
     technique = ['D3',
@@ -60,6 +57,5 @@ def random_musings():
         test = ("{} are you sure you should be using {}. {} thinks you "
               "should definitely be using {}" .format(who, what, expert, option))
     return test
-        
 
 

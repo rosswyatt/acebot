@@ -26,7 +26,7 @@ from stats import linker
 from stats2 import linker
 from calculator import InputsCalc
 import prisStats
-import randomMusing
+from randomMusing import random_musings
 
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -159,7 +159,7 @@ def handle_command(command, channel, ts):
         response=shitty_task(command)
 
     elif command.startswith("what do you think"):
-        response=random_musing()
+        response=random_musings()
 
 
     elif command.startswith("prison population"):
