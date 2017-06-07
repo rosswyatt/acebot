@@ -24,11 +24,11 @@ def random_musings():
                  'user stories'
                  ]
 
-    dash_member = ['Ross',
-               'Andy',
-               'Vicky',
-               'Robin',
-               'Karik'
+    dash_member = ['<@ross_wyatt>',
+               '<@apoulton>',
+               '<@vickyhughes>',
+               '<@robin_linacre>',
+               '<@karik.isichei>'
                 ]
 
 
