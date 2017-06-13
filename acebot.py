@@ -27,6 +27,7 @@ from stats2 import linker
 from calculator import InputsCalc
 import prisStats
 from randomMusing import random_musings
+from projectnamer import projectnamer
 
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -85,6 +86,8 @@ def handle_command(command, channel, ts):
         response = "http://dash.mojanalytics.xyz/"
     elif command.startswith('it number'):
         response = "0800 783 0162"
+    elif command.startswith('name my project'):
+        response = projectnamer()
 
     elif 'dsh' in command or 'dash' in command:
         response = "AceBot does not recognise this team name.  Please use 'ACE' or 'the team formerly known as ACE' when talking to me"
