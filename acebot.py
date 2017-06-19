@@ -251,7 +251,7 @@ if __name__ == "__main__":
         print("AceBot connected and running!")
         while True:
             command, channel, ts, jrFlag = parse_slack_output(slack_client.rtm_read())
-            if jrFlag = True:
+            if jrFlag:
                 slack_client.api_call("chat.postMessage", channel=channel, text="<@jonroberts> the message above is for you...", as_user=True)
             elif command and channel:
                 handle_command(command, channel, ts)
