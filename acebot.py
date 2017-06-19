@@ -34,6 +34,7 @@ from WuTang import wutang
 BOT_ID = os.environ.get("BOT_ID")
 
 AT_BOT = "<@" + BOT_ID + ">"
+jonRob = "Annoyin’ Ambassador"
 EXAMPLE_COMMAND = "do"
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -48,8 +49,10 @@ def parse_slack_output(slack_rtm_output):
     if output_list and len(output_list) > 0:
         for output in output_list:
             if output and 'text' in output and AT_BOT in output['text']:
-                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts']
-    return None, None, None
+                return output['text'].split(AT_BOT)[1].strip().lower(), output['channel'], output['ts'], False
+            elif output and 'text' in output and jonRob in output['text']:
+                return output['text'].split(jonRob)[1].strip().lower(), output['channel'], output['ts'], True
+    return None, None, None, None
 
 
 # Create a function that handles the bots responses back to the channel.  First it checks to see if certain words, phrases are used.  Depending on the logic statements it will load an answer into the response and post back to channel at the end. (Should maye split this into multiple functions or hold the data in a datasource....)
@@ -247,8 +250,10 @@ if __name__ == "__main__":
     if slack_client.rtm_connect():
         print("AceBot connected and running!")
         while True:
-            command, channel, ts = parse_slack_output(slack_client.rtm_read())
-            if command and channel:
+            command, channel, ts, jrFlag = parse_slack_output(slack_client.rtm_read())
+            if jrFlag = True:
+                slack_client.api_call("chat.postMessage", channel=channel, text="<@jonroberts> the message above is for you...", as_user=True)
+            elif command and channel:
                 handle_command(command, channel, ts)
             time.sleep(READ_WEBSOCKET_DELAY)
 
