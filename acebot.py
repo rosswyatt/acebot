@@ -175,7 +175,7 @@ def handle_command(command, channel, ts):
     	channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
-    	channel = "U2TAVMERW"
+    	channel = "U50LV37RT"
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
         if len(k)>10:
