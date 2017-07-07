@@ -174,7 +174,7 @@ def handle_command(command, channel, ts):
     	channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = "/giphy kittens"
-    	channel = "<@ross_wyatt>"
+    	channel = "U2TAVMERW"
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
         if len(k)>10:
