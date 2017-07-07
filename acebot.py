@@ -171,7 +171,7 @@ def handle_command(command, channel, ts):
     elif command.startswith("what are you thinking"):
         response=random_musings()
     elif command.startswith("push"):
-    	response = command[6:]
+    	response = command[5:]
     	channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
