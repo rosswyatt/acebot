@@ -29,6 +29,7 @@ import prisStats
 from randomMusing import random_musings
 from projectnamer import projectnamer
 from WuTang import wutang
+from urllib.request import urlopen
 
 
 BOT_ID = os.environ.get("BOT_ID")
@@ -173,7 +174,7 @@ def handle_command(command, channel, ts):
     	response = command[6:]
     	channel = "G2T9SMUVD"
     elif command == "make olivia happy":
-    	response = "/giphy kittens"
+    	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
     	channel = "U2TAVMERW"
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
