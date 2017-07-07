@@ -169,8 +169,12 @@ def handle_command(command, channel, ts):
 
     elif command.startswith("what are you thinking"):
         response=random_musings()
-
-
+    elif command.startswith("push"):
+    	response = command[6:]
+    	channel = "G2T9SMUVD"
+    elif command == "make olivia happy"
+    	response = "/giphy kittens"
+    	channel = "<@ross_wyatt>"
     elif command.startswith("prison population"):
         k=prisStats.handleResponse(command)
         if len(k)>10:
