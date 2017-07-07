@@ -172,7 +172,7 @@ def handle_command(command, channel, ts):
     elif command.startswith("push"):
     	response = command[6:]
     	channel = "G2T9SMUVD"
-    elif command == "make olivia happy"
+    elif command == "make olivia happy":
     	response = "/giphy kittens"
     	channel = "<@ross_wyatt>"
     elif command.startswith("prison population"):
