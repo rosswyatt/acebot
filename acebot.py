@@ -117,13 +117,13 @@ def handle_command(command, channel, ts):
     elif command =="benugo menu":
         response = menu()
 
-    elif command =="halloumi":
-        answer = menu_search("halloumi")
-        if answer[0]:
-            response = ("%s available on %s" % answer[1],answer[0])
-        else:
-            response = ("Sadness, no halloumi this week.")
-        answer = None
+    # elif command =="halloumi":
+    #     answer = menu_search("halloumi")
+    #     if answer[0]:
+    #         response = ("%s available on %s" % answer[1],answer[0])
+    #     else:
+    #         response = ("Sadness, no halloumi this week.")
+    #     answer = None
     elif command.startswith('i want'):
         eats = command[7:]
         response = halloumi(eats)
