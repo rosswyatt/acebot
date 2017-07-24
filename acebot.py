@@ -172,7 +172,7 @@ def handle_command(command, channel, ts):
     elif command.startswith("what are you thinking"):
         response=random_musings()
     elif command.startswith("push"):
-        if '/acephy' in command:
+        if "/acephy" in command:
             response = command[5:]
             # channel = "G2T9SMUVD"
             slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
