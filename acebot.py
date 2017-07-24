@@ -184,7 +184,7 @@ def handle_command(command, channel, ts):
             response = data['data']['fixed_height_downsampled_url']
         else:
             response = command[5:]
-    	    channel = "G2T9SMUVD"
+            channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
     	channel = "U50LV37RT"
