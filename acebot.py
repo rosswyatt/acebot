@@ -180,7 +180,7 @@ def handle_command(command, channel, ts):
             searchCommand = searchCommand.replace(" ","+")
             gifurl = "http://api.giphy.com/v1/gifs/random?tag=" + searchCommand + "&api_key=" + giphyAPI
             data = json.loads(urlopen(gifurl).read())
-            response = data['data']['image_original_url'])
+            response = data['data']['image_original_url']
         else:
             response = command[5:]
     	    # channel = "G2T9SMUVD"
