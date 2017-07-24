@@ -175,16 +175,16 @@ def handle_command(command, channel, ts):
     elif command.startswith("push"):
         if "/acephy" in command:
             response = command[5:]
-            # channel = "G2T9SMUVD"
+            channel = "G2T9SMUVD"
             slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
             searchCommand = command.split("/acephy ")[1]
             searchCommand = searchCommand.replace(" ","+")
             gifurl = "http://api.giphy.com/v1/gifs/random?tag=" + searchCommand + "&api_key=" + giphyAPI
             data = json.loads(urlopen(gifurl).read())
-            response = data['data']['image_original_url']
+            response = data['data']['fixed_height_downsampled_url']
         else:
             response = command[5:]
-    	    # channel = "G2T9SMUVD"
+    	    channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
     	channel = "U50LV37RT"
