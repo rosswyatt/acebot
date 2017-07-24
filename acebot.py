@@ -181,7 +181,7 @@ def handle_command(command, channel, ts):
             gifurl = "http://api.giphy.com/v1/gifs/random?tag=" + searchCommand + "&api_key=" + giphyAPI
             data = json.loads(urlopen(gifurl).read())
             response = data['data']['image_original_url'])
-        elif:
+        else:
             response = command[5:]
     	    # channel = "G2T9SMUVD"
     elif command == "make olivia happy":
