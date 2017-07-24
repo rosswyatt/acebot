@@ -4,7 +4,7 @@
 # # AceBot
 # ### This program is for a slack bot called AceBot
 
-# The first part of this program will import the needed libraries and set the required IDs.  The BOT_ID and the SLACK_BOT_TOKEN have already been put into my virtualenv. 
+# The first part of this program will import the needed libraries and set the required IDs.  The BOT_ID and the SLACK_BOT_TOKEN have already been put into my virtualenv.
 
 # In[ ]:
 
@@ -22,7 +22,7 @@ from weather import weather_emoji
 from randomSong import song_url
 from traintimes import TrainTimes, CallTrainTimes
 from roombookingquery import roombooking, roomcleaning
-from stats import linker 
+from stats import linker
 from stats2 import linker
 from calculator import InputsCalc
 import prisStats
@@ -33,6 +33,7 @@ from urllib.request import urlopen
 
 
 BOT_ID = os.environ.get("BOT_ID")
+giphyAPI = os.environ.get("giphyAPI")
 
 AT_BOT = "<@" + BOT_ID + ">"
 jonRob = "Annoyin’ Ambassador"
@@ -41,7 +42,7 @@ EXAMPLE_COMMAND = "do"
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
 
-# Create a function that check if messages are directed at the bot.  Return none if @AceBot is not used within message.  If it is used then return the text, channel and the timestamp of the message. 
+# Create a function that check if messages are directed at the bot.  Return none if @AceBot is not used within message.  If it is used then return the text, channel and the timestamp of the message.
 
 # In[ ]:
 
@@ -60,7 +61,7 @@ def parse_slack_output(slack_rtm_output):
 
 # In[ ]:
 
-def handle_command(command, channel, ts):	
+def handle_command(command, channel, ts):
     response = "We still need to add this command"
     if command.startswith('show karik'):
         response = "https://ibb.co/goaOgF"
@@ -107,13 +108,13 @@ def handle_command(command, channel, ts):
 
     elif command.startswith('magic8'):
     	response = magic_8()
-    
+
     elif command == "help":
     	response = help()
 
     elif command =="github":
         response = "https://github.com/rosswyatt/acebot"
-        
+
     elif command =="benugo menu":
         response = menu()
 
@@ -129,10 +130,10 @@ def handle_command(command, channel, ts):
         response = halloumi(eats)
     elif command.startswith('python'):
         response=pyHelp(command)
-    
+
     elif command.startswith('what project'):
         response = handle_who_what(command)
-        
+
     elif command.startswith('next holiday'):
         response = nh()
 
@@ -153,7 +154,7 @@ def handle_command(command, channel, ts):
         try:
             results=roomcleaning(command)
             for response in results:
-                response = "Your search results have opened in the browser"    
+                response = "Your search results have opened in the browser"
         except():
             response = "To book a room, type book a room [now/today/tomorrow/thisweek/nextweek] [number of people] [length(minutes)]"
     elif "stats" in command:
@@ -162,7 +163,7 @@ def handle_command(command, channel, ts):
 
     elif command.startswith("calculate"):
         response = "The calculator has been disabled due to abuse, sorry"
-    
+
     elif command.startswith("allocate  "):
         response = "The winner is <@apoulton> again"
     elif command.startswith("allocate"):
@@ -171,8 +172,18 @@ def handle_command(command, channel, ts):
     elif command.startswith("what are you thinking"):
         response=random_musings()
     elif command.startswith("push"):
-    	response = command[5:]
-    	channel = "G2T9SMUVD"
+        if '/acephy' in command:
+            response = command[5:]
+            # channel = "G2T9SMUVD"
+            slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+            searchCommand = command.split("/acephy ")[1]
+            searchCommand = searchCommand.replace(" ","+")
+            gifurl = "http://api.giphy.com/v1/gifs/random?tag=" + searchCommand + "&api_key=" + giphyAPI
+            data = json.loads(urlopen(gifurl).read())
+            response = data['data']['image_original_url'])
+        elif:
+            response = command[5:]
+    	    # channel = "G2T9SMUVD"
     elif command == "make olivia happy":
     	response = urlopen("http://thecatapi.com/api/images/get?format=src&type=gif").geturl()
     	channel = "U50LV37RT"
@@ -199,7 +210,7 @@ def handle_command(command, channel, ts):
 def handle_who_what(command):
     proj_text = whos_on_what(command)
     proj_out = []
-    
+
     for i in proj_text:
         if isinstance(i, list):
             proj_out.append(' '.join(i))
@@ -209,7 +220,7 @@ def handle_who_what(command):
     for i in range(len(proj_out)):
         slack_client.api_call("chat.postMessage", channel=channel, text=proj_out[i].replace(","," "), as_user=True)
         time.sleep(0.25)
-    
+
     return "And that's that!"
 
 def ace_song():
@@ -229,8 +240,8 @@ def ace_song():
 # In[ ]:
 
 def magic_8():
-	magic = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it", 
-	"As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again", 
+	magic = ["It is certain", "It is decidedly so", "Without a doubt", "Yes, definitely", "You may rely on it",
+	"As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes", "Reply hazy try again",
 	"Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "Don't count on it",
 	"My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
 
@@ -264,4 +275,3 @@ if __name__ == "__main__":
 
     else:
         print("Connection failed.  Invalid Slack token or bot ID?")
-
