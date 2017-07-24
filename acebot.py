@@ -30,6 +30,7 @@ from randomMusing import random_musings
 from projectnamer import projectnamer
 from WuTang import wutang
 from urllib.request import urlopen
+import json
 
 
 BOT_ID = os.environ.get("BOT_ID")
