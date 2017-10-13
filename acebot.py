@@ -166,7 +166,7 @@ def handle_command(command, channel, ts):
         response = "The calculator has been disabled due to abuse, sorry"
 
     elif command.startswith("allocate  "):
-        response = "The winner is <@apoulton> again"
+        response = "The winner is :haydan: <@daniel_hills> <@hayden_sansum>"
     elif command.startswith("allocate"):
         response=shitty_task(command)
 
