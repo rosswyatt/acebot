@@ -92,7 +92,7 @@ def handle_command(command, channel, ts):
     elif command.startswith('webpage'):
         response = "http://dash.mojanalytics.xyz/"
     elif command.startswith('it number'):
-        response = "0800 783 0162"
+        response = "0800 917 5148 (old number: 0800 783 0162)"
     elif command.startswith('name my project'):
         response = projectnamer()
     elif command.startswith('wutang my project'):
