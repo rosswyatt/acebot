@@ -14,7 +14,7 @@ pyparsing==2.1.10
 python-dateutil==2.6.0
 python-pptx==0.6.2
 pytz==2016.10
-requests==2.13.0
+requests==2.20.0
 six==1.10.0
 slackclient==1.0.5
 urllib3==1.23
